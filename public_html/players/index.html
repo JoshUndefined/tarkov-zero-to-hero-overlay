@@ -3,55 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <title>Tarkov Zero to The Guide</title>
-  <style>
-    body { background: transparent; margin: 0; }
-    .map-container {
-      display: flex;
-      gap: 10px;
-      padding: 20px;
-    }
-    .map {
-      padding: 10px 15px;
-      border: 2px solid #aaa;
-      border-radius: 8px;
-      background: white;
-      font-size: 24px;
-    }
-    .highlight {
-      background-color: yellow;
-      border-color: orange;
-      font-weight: bold;
-    }
-  </style>
+  <link rel="stylesheet" href="/maps/style.css">
 </head>
 <body>
 
-  <div class="map-container" id="mapContainer"></div>
+  <div class="player-container" id="playerContainer">test</div>
 
   <script>
     let currentIndex = -1;
 
-    function updateMaps() {
+    function updatePlayers() {
         fetch('/api/get_data.php')
         .then(res => res.json())
         .then(data => {
-          const container = document.getElementById('mapContainer');
+          const container = document.getElementById('playerContainer');
           container.innerHTML = '';
-          data.maps.forEach((map, i) => {
-              const div = document.createElement('div');
-              div.className = 'map';
-              div.textContent = map;
-              if (i === data.currentIndex) div.classList.add('highlight');
-              container.appendChild(div);
+          data.players.forEach((player, i) => {
+              if(player.active) {
+                const div = document.createElement('div');
+                div.className = 'player';
+                const img = new Image(200, 200);
+                img.src = "player.url";
+                // img.className = 'player dead';
+
+                // TODO: https://media.istockphoto.com/id/928418862/vector/skull-and-bones-icon.jpg?s=612x612&w=0&k=20&c=Ul5MJk6AtM27qr7agihVgaP5LaJhs5_tk6SLGvh2EVc=
+                
+                div.appendChild(img);
+                div.innerHTML = "<img src='" + player.url + "' />";
+                if(player.dead)
+                  img.classList.add('dead');
+                container.appendChild(div);
+              }
           });
         });
     }
 
     // Poll every 1000ms
-    setInterval(updateMaps, 1000);
+    setInterval(updatePlayers, 10000);
 
     // Initial load
-    updateMaps();
+    updatePlayers();
   </script>
 
 </body>

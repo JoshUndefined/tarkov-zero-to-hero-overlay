@@ -3,26 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Tarkov Zero to The Guide</title>
-  <style>
-    body { background: transparent; margin: 0; font-family:'Courier New', Courier, monospace; }
-    .map-container {
-      display: flex;
-      gap: 10px;
-      padding: 20px;
-    }
-    .map {
-      padding: 10px 15px;
-      border: 2px solid #aaa;
-      border-radius: 8px;
-      background: white;
-      font-size: 24px;
-    }
-    .highlight {
-      background-color: yellow;
-      border-color: orange;
-      font-weight: bold;
-    }
-  </style>
+  <link rel="stylesheet" href="/maps/style.css">
 </head>
 <body>
 
@@ -32,7 +13,7 @@
     let currentIndex = -1;
 
     function updateMaps() {
-      fetch('/api/get_map_data.php')
+      fetch('/api/get_data.php')
         .then(res => res.json())
         .then(data => {
           const container = document.getElementById('mapContainer');
