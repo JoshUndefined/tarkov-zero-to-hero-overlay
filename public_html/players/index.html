@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Tarkov Zero to The Guide</title>
+  <style>
+    body { background: transparent; margin: 0; }
+    .map-container {
+      display: flex;
+      gap: 10px;
+      padding: 20px;
+    }
+    .map {
+      padding: 10px 15px;
+      border: 2px solid #aaa;
+      border-radius: 8px;
+      background: white;
+      font-size: 24px;
+    }
+    .highlight {
+      background-color: yellow;
+      border-color: orange;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="map-container" id="mapContainer"></div>
+
+  <script>
+    let currentIndex = -1;
+
+    function updateMaps() {
+        fetch('/api/get_data.php')
+        .then(res => res.json())
+        .then(data => {
+          const container = document.getElementById('mapContainer');
+          container.innerHTML = '';
+          data.maps.forEach((map, i) => {
+              const div = document.createElement('div');
+              div.className = 'map';
+              div.textContent = map;
+              if (i === data.currentIndex) div.classList.add('highlight');
+              container.appendChild(div);
+          });
+        });
+    }
+
+    // Poll every 1000ms
+    setInterval(updateMaps, 1000);
+
+    // Initial load
+    updateMaps();
+  </script>
+
+</body>
+</html>
