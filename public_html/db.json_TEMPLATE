@@ -1,0 +1,26 @@
+{
+    "maps": [
+        "Ground Zero",
+        "Streets",
+        "Interchange",
+        "Customs",
+        "Shoreline",
+        "Lighthouse",
+        "Reserve",
+        "Woods",
+        "Factory",
+        "Victory"
+    ],
+    "currentIndex": 0,
+    "players": [
+        {
+            "name": "Player Name",
+            "active": true,
+            "twitchID": "12345",
+            "url": "profile image url",
+            "deaths": 0,
+            "dead": false
+        }
+        
+    ]
+}
