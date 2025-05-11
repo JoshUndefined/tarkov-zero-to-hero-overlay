@@ -1,24 +1,52 @@
-body { background: transparent; margin: 0; font-family:'Courier New', Courier, monospace; }
+body {
+    background: transparent;
+    margin: 0;
+    font-family: 'Courier New', Courier, monospace;
+}
 
 .map-container {
     display: flex;
     gap: 10px;
     padding: 20px;
 }
+
 .map {
     padding: 10px 15px;
-    border: 2px solid #aaa;
+    border: 2px solid #3a3;
     border-radius: 8px;
-    background: white;
+    background: #111;
     font-size: 18px;
-    filter: brightness(0.8);
-    filter: opacity(0.6);
-    
+    color: #bfffbf;
+    filter: opacity(0.7);
+    box-shadow: 0 0 10px rgba(0, 255, 100, 0.3);
+    position: relative;
 }
+
 .highlight {
-    background-color: yellow;
-    border-color: orange;
+    background-color: #003300;
+    border-color: #00ff00;
     font-weight: bold;
-    filter: brightness(1);
-    filter: opacity(0.8);
+    color: #ccffcc;
+    filter: opacity(1);
+    box-shadow: 0 0 15px rgba(0, 255, 100, 0.7);
+}
+
+.map.completed::before {
+    content: "✔";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 28px;
+    color: #00ff00;
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.6);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.map.highlight:last-child {
+    background-color: #333000;
+    border-color: gold;
+    color: #fff8d4;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
 }

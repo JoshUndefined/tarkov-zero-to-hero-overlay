@@ -7,33 +7,35 @@
 </head>
 <body>
 
-  <div class="map-container" id="mapContainer"></div>
+    <div class="map-container" id="mapContainer"></div>
 
-  <script>
-    let currentIndex = -1;
+    <script>
+        let currentIndex = -1;
 
-    function updateMaps() {
-      fetch('/api/get_data.php')
-        .then(res => res.json())
-        .then(data => {
-          const container = document.getElementById('mapContainer');
-          container.innerHTML = '';
-          data.maps.forEach((map, i) => {
-              const div = document.createElement('div');
-              div.className = 'map';
-              div.textContent = map;
-              if (i === data.currentIndex) div.classList.add('highlight');
-              container.appendChild(div);
-          });
-        });
-    }
+        function updateMaps() {
+            fetch('/api/get_data.php')
+                .then(res => res.json())
+                .then(data => {
+                    const container = document.getElementById('mapContainer');
+                    container.innerHTML = '';
+                    data.maps.forEach((map, i) => {
+                        const div = document.createElement('div');
+                        div.className = 'map';
+                        div.textContent = map;
+                        if (i < data.currentIndex) {
+                            div.classList.add('completed');
+                        }
+                        if (i === data.currentIndex) {
+                            div.classList.add('highlight');
+                        }
+                    container.appendChild(div);
+                    });
+                });
+            }
 
-    // Poll
-    setInterval(updateMaps, 10000);
-
-    // Initial load
-    updateMaps();
-  </script>
+        setInterval(updateMaps, 10000);
+        updateMaps();
+    </script>
 
 </body>
 </html>
